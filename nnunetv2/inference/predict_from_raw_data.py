@@ -348,6 +348,7 @@ class nnUNetPredictor(object):
         with multiprocessing.get_context("spawn").Pool(num_processes_segmentation_export) as export_pool:
             worker_list = [i for i in export_pool._pool]
             r = []
+            step
             for preprocessed in data_iterator:
                 data = preprocessed['data']
                 if isinstance(data, str):
@@ -502,6 +503,7 @@ class nnUNetPredictor(object):
 
     def _internal_get_sliding_window_slicers(self, image_size: Tuple[int, ...]):
         slicers = []
+        self.tile_step_size = 1 # Added
         if len(self.configuration_manager.patch_size) < len(image_size):
             assert len(self.configuration_manager.patch_size) == len(
                 image_size) - 1, 'if tile_size has less entries than image_size, ' \
