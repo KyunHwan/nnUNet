@@ -348,7 +348,7 @@ class nnUNetPredictor(object):
         with multiprocessing.get_context("spawn").Pool(num_processes_segmentation_export) as export_pool:
             worker_list = [i for i in export_pool._pool]
             r = []
-            step
+            self.tile_step_size = 1
             for preprocessed in data_iterator:
                 data = preprocessed['data']
                 if isinstance(data, str):
